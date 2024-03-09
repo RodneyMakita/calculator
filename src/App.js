@@ -1,23 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './styles.css';
+import math from 'mathjs'
 
 function App() {
+  const [previousOperand, setPreviousOperand] = useState('');
+  const [currentOperand, setCurrentOperand] = useState('');
+
+  // Function to handle button clicks
+  const handleButtonClick = (value) => {
+    setCurrentOperand(currentOperand + value);
+  };
+
+  // Function to handle AC button click
+  const handleACClick = () => {
+    setPreviousOperand('');
+    setCurrentOperand('');
+  };
+
+  // Function to handle DEL button click
+  const handleDELClick = () => {
+    setCurrentOperand(currentOperand.slice(0, -1));
+  };
+
+  const handleEqualsClick = () => {
+    try {
+      // Use eval() to evaluate the expression
+      const result = eval(currentOperand);
+      // If you're using mathjs:
+      // const result = math.evaluate(currentOperand);
+      
+      // Update the state to display the result
+      setPreviousOperand(currentOperand);
+      setCurrentOperand(result.toString());
+    } catch (error) {
+      // Handle errors if the expression is invalid
+      setCurrentOperand('Error Mfanawakithi');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='calculator-grid'>
+      <div className='output'>
+        <div className='previous-operand'>{previousOperand}</div>
+        <div className='current-operand'>{currentOperand}</div>
+      </div>
+      <button className='span-two' onClick={handleACClick}>AC</button>
+      <button onClick={handleDELClick}>DEL</button>
+      <button onClick={() => handleButtonClick('÷')}>÷</button>
+      <button onClick={() => handleButtonClick('1')}>1</button>
+      <button onClick={() => handleButtonClick('2')}>2</button>
+      <button onClick={() => handleButtonClick('3')}>3</button>
+      <button onClick={() => handleButtonClick('*')}>*</button>
+      <button onClick={() => handleButtonClick('4')}>4</button>
+      <button onClick={() => handleButtonClick('5')}>5</button>
+      <button onClick={() => handleButtonClick('6')}>6</button>
+      <button onClick={() => handleButtonClick('+')}>+</button>
+      <button onClick={() => handleButtonClick('7')}>7</button>
+      <button onClick={() => handleButtonClick('8')}>8</button>
+      <button onClick={() => handleButtonClick('9')}>9</button>
+      <button onClick={() => handleButtonClick('-')}>-</button>
+      <button onClick={() => handleButtonClick('.')}>.</button>
+      <button onClick={() => handleButtonClick('0')}>0</button>
+      <button className="span-two" onClick={handleEqualsClick}>=</button>
     </div>
   );
 }
