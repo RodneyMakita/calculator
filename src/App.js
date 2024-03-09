@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './styles.css';
-import math from 'mathjs'
 
 function App() {
   const [previousOperand, setPreviousOperand] = useState('');
@@ -24,11 +23,8 @@ function App() {
 
   const handleEqualsClick = () => {
     try {
-      // Use eval() to evaluate the expression
-      const result = eval(currentOperand);
-      // If you're using mathjs:
-      // const result = math.evaluate(currentOperand);
-      
+      // Use Function constructor to evaluate the expression
+      const result = new Function('return ' + currentOperand)();
       // Update the state to display the result
       setPreviousOperand(currentOperand);
       setCurrentOperand(result.toString());
