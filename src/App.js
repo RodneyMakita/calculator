@@ -7,12 +7,23 @@ function App() {
   const [currentOperand, setCurrentOperand] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
+  // Load dark mode setting from localStorage and apply it
   useEffect(() => {
+    const savedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
+    if (savedDarkMode !== null) {
+      setDarkMode(savedDarkMode);
+      document.body.classList.toggle('dark-mode', savedDarkMode);
+    }
+  }, []);
+
+  // Update localStorage and body class when darkMode changes
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
     document.body.classList.toggle('dark-mode', darkMode);
   }, [darkMode]);
 
   const handleButtonClick = (value) => {
-    setCurrentOperand(currentOperand + value);
+    setCurrentOperand(prev => prev + value);
   };
 
   const handleACClick = () => {
@@ -21,7 +32,7 @@ function App() {
   };
 
   const handleDELClick = () => {
-    setCurrentOperand(currentOperand.slice(0, -1));
+    setCurrentOperand(prev => prev.slice(0, -1));
   };
 
   const handleEqualsClick = () => {
@@ -35,7 +46,7 @@ function App() {
   };
 
   const toggleDarkMode = () => {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
+    setDarkMode(prev => !prev);
   };
 
   return (
@@ -63,33 +74,21 @@ function App() {
       <button onClick={() => handleButtonClick('0')}>0</button>
       <button className='span-two' onClick={handleEqualsClick}>=</button>
       <div className="theme-switch">
-        <label htmlFor="theme" className="theme">
-          <span className="theme__toggle-wrap">
-            <input
-              id="theme"
-              className="theme__toggle"
-              type="checkbox"
-              role="switch"
-              name="theme"
-              value="dark"
-              checked={darkMode}
-              onChange={toggleDarkMode}
-            />
-            <span className="theme__fill"></span>
-            <span className="theme__icon">
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-              <span className="theme__icon-part"></span>
-            </span>
-          </span>
-        </label>
-      </div>
+  <label htmlFor="theme">
+    <input
+      id="theme"
+      className="theme__toggle"
+      type="checkbox"
+      role="switch"
+      name="theme"
+      value="dark"
+      checked={darkMode}
+      onChange={toggleDarkMode}
+    />
+    <span className="theme-slider"></span>
+  </label>
+</div>
+
     </div>
   );
 }
