@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import * as math from 'mathjs';
-
 
 function App() {
   const [previousOperand, setPreviousOperand] = useState('');
   const [currentOperand, setCurrentOperand] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
 
-  // Function to handle button clicks
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+  }, [darkMode]);
+
   const handleButtonClick = (value) => {
     setCurrentOperand(currentOperand + value);
   };
 
-  // Function to handle AC button click
   const handleACClick = () => {
     setPreviousOperand('');
     setCurrentOperand('');
   };
 
-  // Function to handle DEL button click
   const handleDELClick = () => {
     setCurrentOperand(currentOperand.slice(0, -1));
   };
 
   const handleEqualsClick = () => {
     try {
-      // Use math.evaluate() to evaluate the expression
       const result = math.evaluate(currentOperand);
-      // Update the state to display the result
       setPreviousOperand(currentOperand);
       setCurrentOperand(result.toString());
     } catch (error) {
-      // Handle errors if the expression is invalid
       setCurrentOperand('Error Mfanawakithi');
     }
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
   return (
@@ -44,7 +46,7 @@ function App() {
       </div>
       <button className='span-two' onClick={handleACClick}>AC</button>
       <button onClick={handleDELClick}>DEL</button>
-      <button onClick={() => handleButtonClick('÷')}>÷</button>
+      <button onClick={() => handleButtonClick('/')}>÷</button>
       <button onClick={() => handleButtonClick('1')}>1</button>
       <button onClick={() => handleButtonClick('2')}>2</button>
       <button onClick={() => handleButtonClick('3')}>3</button>
@@ -59,7 +61,35 @@ function App() {
       <button onClick={() => handleButtonClick('-')}>-</button>
       <button onClick={() => handleButtonClick('.')}>.</button>
       <button onClick={() => handleButtonClick('0')}>0</button>
-      <button className="span-two" onClick={handleEqualsClick}>=</button>
+      <button className='span-two' onClick={handleEqualsClick}>=</button>
+      <div className="theme-switch">
+        <label htmlFor="theme" className="theme">
+          <span className="theme__toggle-wrap">
+            <input
+              id="theme"
+              className="theme__toggle"
+              type="checkbox"
+              role="switch"
+              name="theme"
+              value="dark"
+              checked={darkMode}
+              onChange={toggleDarkMode}
+            />
+            <span className="theme__fill"></span>
+            <span className="theme__icon">
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+              <span className="theme__icon-part"></span>
+            </span>
+          </span>
+        </label>
+      </div>
     </div>
   );
 }
