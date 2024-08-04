@@ -5,21 +5,15 @@ import * as math from 'mathjs';
 function App() {
   const [previousOperand, setPreviousOperand] = useState('');
   const [currentOperand, setCurrentOperand] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
-
-  // Load dark mode setting from localStorage and apply it
-  useEffect(() => {
+  const [darkMode, setDarkMode] = useState(() => {
     const savedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
-    if (savedDarkMode !== null) {
-      setDarkMode(savedDarkMode);
-      document.body.classList.toggle('dark-mode', savedDarkMode);
-    }
-  }, []);
+    return savedDarkMode !== null ? savedDarkMode : false;
+  });
 
-  // Update localStorage and body class when darkMode changes
+  // Update body class when darkMode changes
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
     document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   const handleButtonClick = (value) => {
@@ -74,21 +68,20 @@ function App() {
       <button onClick={() => handleButtonClick('0')}>0</button>
       <button className='span-two' onClick={handleEqualsClick}>=</button>
       <div className="theme-switch">
-  <label htmlFor="theme">
-    <input
-      id="theme"
-      className="theme__toggle"
-      type="checkbox"
-      role="switch"
-      name="theme"
-      value="dark"
-      checked={darkMode}
-      onChange={toggleDarkMode}
-    />
-    <span className="theme-slider"></span>
-  </label>
-</div>
-
+        <label htmlFor="theme">
+          <input
+            id="theme"
+            className="theme__toggle"
+            type="checkbox"
+            role="switch"
+            name="theme"
+            value="dark"
+            checked={darkMode}
+            onChange={toggleDarkMode}
+          />
+          <span className="theme-slider"></span>
+        </label>
+      </div>
     </div>
   );
 }
