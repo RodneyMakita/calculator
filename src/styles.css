@@ -1,4 +1,10 @@
 /* Default */
+body, html {
+  overflow-x: hidden;
+}
+* {
+  box-sizing: border-box;
+}
 :root {
     --bg: white;
     --text-color: black;
@@ -7,6 +13,7 @@
     --output-background: rgba(0, 0, 0, 0.75);
     --previous-operand-color: rgba(0, 0, 0, 0.75);
     --current-operand-color: black;
+
   }
   
   body.dark-mode {
@@ -17,11 +24,13 @@
     --output-background: rgba(255, 255, 255, 0.75);
     --previous-operand-color: rgba(255, 255, 255, 0.75);
     --current-operand-color: white;
+
   }
   
   body {
     background-color: var(--bg);
     color: var(--text-color);
+
   }
   
   .calculator-grid {
@@ -31,6 +40,9 @@
     height: 100vh;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    width: 100vw;
+    
+
   }
   
   .output {
@@ -73,7 +85,8 @@
   .theme-switch {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 299px;
   }
   
   .theme-switch label {
@@ -321,4 +334,3 @@
       box-shadow: 0 0 0 0.125em var(--primary);
     }
   }
-  
