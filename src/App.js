@@ -55,7 +55,7 @@ function App() {
       setPreviousOperand(`${cleanedExpression} =`);
       setCurrentOperand(result.toString());
     } catch (error) {
-      setCurrentOperand('Error');
+      setCurrentOperand('Error Mfanawakithi');
     }
   };
 
