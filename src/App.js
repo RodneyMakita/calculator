@@ -120,8 +120,11 @@ function App() {
           />
           <span className="theme-slider"></span>
         </label>
+      
       </div>
+      
     </div>
+    
   );
 }
 

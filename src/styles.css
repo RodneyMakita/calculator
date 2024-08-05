@@ -1,10 +1,17 @@
 /* General styles */
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Teko:wght@300..700&display=swap');
+
 body, html {
   overflow-x: hidden;
+
 }
 
 * {
   box-sizing: border-box;
+  font-family: "Teko", sans-serif;
+  font-optical-sizing: auto;
+  font-weight:400px;
+  font-style: normal;
 }
 
 :root {
@@ -229,5 +236,35 @@ button:hover {
 
   .theme__toggle:focus-visible {
     box-shadow: 0 0 0 .125em var(--primary);
+  }
+}
+
+/* Media queries for desktop devices */
+@media (min-width: 768px) {
+  .calculator-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto repeat(5, 1fr);
+    gap: 15px; /* Increase the gap for better spacing on larger screens */
+    height: auto; /* Adjust height to fit content on larger screens */
+    width: 30%; /* Adjust width for desktop view */
+    margin: 50px auto; /* Center the calculator on the screen */
+  }
+
+  button {
+    font-size: 2.5rem; /* Increase font size for buttons */
+    padding: 10px; /* Increase padding for buttons */
+  }
+
+  .output {
+    font-size: 2rem; /* Increase font size for output */
+    padding: 20px; /* Increase padding for output */
+  }
+
+  .previous-operand {
+    font-size: 2rem; /* Increase font size for previous operand */
+  }
+
+  .current-operand {
+    font-size: 3rem; /* Increase font size for current operand */
   }
 }
