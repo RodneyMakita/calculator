@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Calculator App
+A simple calculator app built with React Native. This app features basic arithmetic operations, a clean user interface, and support for both light and dark modes.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+**Basic Arithmetic Operations**: Addition, subtraction, multiplication, and division.
+**Dark Mode Support**: Toggle between light and dark themes.
+**Editable Inputs**: Tap on numbers to edit them directly.
+**Responsive Design**: Works on various screen sizes.
+## Installation
+To get started with this project, follow these steps:
 
-## Available Scripts
+Clone the Repository
 
-In the project directory, you can run:
+```bash
 
-### `npm start`
+git clone https://github.com/RodneyMakita/calculator.git
+```
+Navigate to the Project Directory
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cd calculator
+Install Dependencies
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
 
-### `npm test`
+npm install
+```
+Run the Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+For Android:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npx react-native run-android
+```
+For iOS (macOS only):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
 
-### `npm run eject`
+npx react-native run-ios
+```
+## Usage
+**Basic Operations**: Use the number buttons and arithmetic operators to perform calculations.
+**Edit Inputs**: Tap on numbers in the display to edit them directly.
+**Toggle Dark Mode**: Use the switch to toggle between light and dark themes.
+## Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contributing
+If you'd like to contribute to this project, please follow these steps:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Fork the Repository
 
-## Learn More
+### Create a Feature Branch
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+git checkout -b feature/your-feature
+```
+### Commit Your Changes
 
-### Code Splitting
+```bash
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+git add .
+git commit -m "Add your message here"
+```
+### Push to the Branch
 
-### Analyzing the Bundle Size
+```bash
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+git push origin feature/your-feature
+```
+### Create a Pull Request
 
-### Making a Progressive Web App
+ Submit a pull request from your branch to the main repository.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Acknowledgments
+React Native: For the framework used in this project.
+MathJS: For the math evaluation library.
