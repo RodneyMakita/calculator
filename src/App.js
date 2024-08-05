@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles.css';
 import * as math from 'mathjs';
 
@@ -9,11 +9,18 @@ function App() {
     const savedDarkMode = JSON.parse(localStorage.getItem('darkMode'));
     return savedDarkMode !== null ? savedDarkMode : false;
   });
+  const currentOperandRef = useRef(null); // Reference for the editable field
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode);
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
+
+  useEffect(() => {
+    if (currentOperandRef.current) {
+      currentOperandRef.current.innerText = currentOperand;
+    }
+  }, [currentOperand]);
 
   const handleButtonClick = (value) => {
     // If the equals sign is present in the previous operand, reset it for a new calculation
@@ -44,16 +51,21 @@ function App() {
 
   const handleEqualsClick = () => {
     try {
-      // Replace 'x' with '*' for calculation
+      // Combine the previous and current operands
       const expression = `${previousOperand} ${currentOperand}`.replace(/x/g, '*');
       
       // Remove trailing operator if present
       const cleanedExpression = expression.replace(/[+\-*/]$/, '');
       
-      // Evaluate the expression
-      const result = math.evaluate(cleanedExpression);
-      setPreviousOperand(`${cleanedExpression} =`);
-      setCurrentOperand(result.toString());
+      // Ensure we don't attempt to evaluate an empty expression
+      if (cleanedExpression.trim()) {
+        // Evaluate the expression
+        const result = math.evaluate(cleanedExpression);
+        setPreviousOperand(''); // Clear previousOperand
+        setCurrentOperand(result.toString());
+      } else {
+        setCurrentOperand('Error My Guy');
+      }
     } catch (error) {
       setCurrentOperand('Error Mfanawakithi');
     }
@@ -67,7 +79,14 @@ function App() {
     <div className='calculator-grid'>
       <div className='output'>
         <div className='previous-operand'>{previousOperand}</div>
-        <div className='current-operand'>{currentOperand}</div>
+        <div
+          className='current-operand'
+          ref={currentOperandRef}
+          contentEditable
+          onInput={(e) => setCurrentOperand(e.currentTarget.innerText)}
+        >
+          {currentOperand}
+        </div>
       </div>
       <button className='span-two' onClick={handleACClick}>AC</button>
       <button onClick={handleDELClick}>DEL</button>
