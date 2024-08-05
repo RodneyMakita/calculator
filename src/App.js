@@ -10,14 +10,27 @@ function App() {
     return savedDarkMode !== null ? savedDarkMode : false;
   });
 
-  // Update body class when darkMode changes
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode);
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   const handleButtonClick = (value) => {
-    setCurrentOperand(prev => prev + value);
+    // If the equals sign is present in the previous operand, reset it for a new calculation
+    if (previousOperand.endsWith('=')) {
+      setPreviousOperand('');
+      setCurrentOperand('');
+    }
+
+    if (['+', '-', '*', '/'].includes(value)) {
+      if (currentOperand) {
+        setPreviousOperand(prev => `${prev} ${currentOperand} ${value}`);
+        setCurrentOperand('');  // Clear current operand after setting previous operand
+      }
+    } else {
+      const displayValue = value === '*' ? 'x' : value;
+      setCurrentOperand(prev => prev + displayValue);
+    }
   };
 
   const handleACClick = () => {
@@ -31,11 +44,18 @@ function App() {
 
   const handleEqualsClick = () => {
     try {
-      const result = math.evaluate(currentOperand);
-      setPreviousOperand(currentOperand);
+      // Replace 'x' with '*' for calculation
+      const expression = `${previousOperand} ${currentOperand}`.replace(/x/g, '*');
+      
+      // Remove trailing operator if present
+      const cleanedExpression = expression.replace(/[+\-*/]$/, '');
+      
+      // Evaluate the expression
+      const result = math.evaluate(cleanedExpression);
+      setPreviousOperand(`${cleanedExpression} =`);
       setCurrentOperand(result.toString());
     } catch (error) {
-      setCurrentOperand('Error Mfanawakithi');
+      setCurrentOperand('Error');
     }
   };
 
@@ -55,7 +75,7 @@ function App() {
       <button onClick={() => handleButtonClick('1')}>1</button>
       <button onClick={() => handleButtonClick('2')}>2</button>
       <button onClick={() => handleButtonClick('3')}>3</button>
-      <button onClick={() => handleButtonClick('*')}>*</button>
+      <button onClick={() => handleButtonClick('*')}>x</button>
       <button onClick={() => handleButtonClick('4')}>4</button>
       <button onClick={() => handleButtonClick('5')}>5</button>
       <button onClick={() => handleButtonClick('6')}>6</button>
