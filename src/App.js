@@ -64,10 +64,10 @@ function App() {
         setPreviousOperand(''); // Clear previousOperand
         setCurrentOperand(result.toString());
       } else {
-        setCurrentOperand('Error My Guy');
+        setCurrentOperand('Dintsang!');
       }
     } catch (error) {
-      setCurrentOperand('Error Mfanawakithi');
+      setCurrentOperand('Mfanawakithi');
     }
   };
 
